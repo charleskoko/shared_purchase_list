@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_purchase_list/core/app_router.dart';
+import 'package:shared_purchase_list/core/presentation/widgets/app_router.dart';
 import 'package:shared_purchase_list/core/shared/colors.dart';
 
 class MyApp extends StatelessWidget {

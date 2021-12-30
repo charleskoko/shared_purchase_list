@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/rounded_button.dart';
 import 'package:shared_purchase_list/core/shared/colors.dart';
-import 'package:shared_purchase_list/core/shared/routes.dart';
 
-class AuthenticationPage extends StatelessWidget {
-  const AuthenticationPage({Key? key}) : super(key: key);
+class RegistrationPage extends StatelessWidget {
   static final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
+  const RegistrationPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +26,7 @@ class AuthenticationPage extends StatelessWidget {
                       Container(
                         alignment: Alignment.bottomLeft,
                         child: Text(
-                          'Log in',
+                          'Sign Up',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -35,6 +36,51 @@ class AuthenticationPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 32),
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        autocorrect: false,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: kBleuColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Enter your username',
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                            color: kBleuColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          labelText: 'Username',
+                          labelStyle:
+                              TextStyle(fontSize: 14, color: kBleuColor),
+                          enabledBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                            ),
+                          ),
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                            ),
+                          ),
+                          border: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                            ),
+                          ),
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.only(
+                              right: 16,
+                            ),
+                            child: Icon(
+                              Ionicons.person_outline,
+                              color: kBleuColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         autocorrect: false,
@@ -69,7 +115,7 @@ class AuthenticationPage extends StatelessWidget {
                             ),
                           ),
                           prefixIcon: Padding(
-                            padding: EdgeInsets.only(
+                            padding: const EdgeInsets.only(
                               right: 16,
                             ),
                             child: Icon(
@@ -79,7 +125,9 @@ class AuthenticationPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(
+                        height: 16,
+                      ),
                       TextFormField(
                         obscureText: true,
                         style: TextStyle(
@@ -123,13 +171,57 @@ class AuthenticationPage extends StatelessWidget {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        obscureText: true,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: kBleuColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Confirm your password',
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                            color: kBleuColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          labelText: 'Password confirmation',
+                          labelStyle:
+                              TextStyle(fontSize: 14, color: kBleuColor),
+                          enabledBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                            ),
+                          ),
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                            ),
+                          ),
+                          border: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                            ),
+                          ),
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.only(
+                              right: 16,
+                            ),
+                            child: Icon(
+                              Ionicons.lock_closed_outline,
+                              color: kBleuColor,
+                            ),
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 32),
-                      RoundedButton(label: 'Log in', onPress: () {}),
+                      RoundedButton(label: 'Sign Up', onPress: () {}),
                       const SizedBox(
                         height: 16,
                       ),
                       Text(
-                        'happy to see you again. Please enjoy the list management experience that our application offers.',
+                        'By signing up, you agreed with our term of services and Privacy Policy.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: kBleuColor,
@@ -139,13 +231,13 @@ class AuthenticationPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Do you have an account?'),
+                          const Text('Already have an account?'),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, Routes.registration);
+                              Navigator.pop(context);
                             },
                             child: Text(
-                              ' Sign up',
+                              ' Log in',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: kBleuColor,

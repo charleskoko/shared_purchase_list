@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_email_text_field.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_password_text_field.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/rounded_button.dart';

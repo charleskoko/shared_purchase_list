@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:shared_purchase_list/core/presentation/widgets/rounded_button.dart';
+import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_email_text_field.dart';
+import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_password_text_field.dart';
+import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_text_field.dart';
+import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/rounded_button.dart';
 import 'package:shared_purchase_list/core/shared/colors.dart';
 
 class RegistrationPage extends StatelessWidget {
@@ -36,184 +39,30 @@ class RegistrationPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 32),
-                      TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        autocorrect: false,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: kBleuColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'Enter your username',
-                          hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: kBleuColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          labelText: 'Username',
-                          labelStyle:
-                              TextStyle(fontSize: 14, color: kBleuColor),
-                          enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          focusedBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          border: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.only(
-                              right: 16,
-                            ),
-                            child: Icon(
-                              Ionicons.person_outline,
-                              color: kBleuColor,
-                            ),
-                          ),
-                        ),
+                      CustomTextField(
+                        label: 'Username',
+                        hintext: 'Enter your username',
+                        stringValueSetter: (value) => print(value),
                       ),
                       const SizedBox(height: 16),
-                      TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        autocorrect: false,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: kBleuColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'Enter your email adress',
-                          hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: kBleuColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          labelText: 'Email',
-                          labelStyle:
-                              TextStyle(fontSize: 14, color: kBleuColor),
-                          enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          focusedBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          border: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.only(
-                              right: 16,
-                            ),
-                            child: Icon(
-                              Ionicons.mail_outline,
-                              color: kBleuColor,
-                            ),
-                          ),
-                        ),
+                      CustomEmailTextField(
+                        stringValueSetter: (value) => print(value),
+                        hintext: 'Enter your email adress',
+                        label: 'Email',
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      TextFormField(
-                        obscureText: true,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: kBleuColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'Enter your password',
-                          hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: kBleuColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          labelText: 'Password',
-                          labelStyle:
-                              TextStyle(fontSize: 14, color: kBleuColor),
-                          enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          focusedBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          border: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.only(
-                              right: 16,
-                            ),
-                            child: Icon(
-                              Ionicons.lock_closed_outline,
-                              color: kBleuColor,
-                            ),
-                          ),
-                        ),
+                      CustomPasswordTextField(
+                        stringValueSetter: (value) => print(value),
+                        hintext: 'Enter your password',
+                        label: 'Password',
                       ),
                       const SizedBox(height: 16),
-                      TextFormField(
-                        obscureText: true,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: kBleuColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'Confirm your password',
-                          hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: kBleuColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          labelText: 'Password confirmation',
-                          labelStyle:
-                              TextStyle(fontSize: 14, color: kBleuColor),
-                          enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          focusedBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          border: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.only(
-                              right: 16,
-                            ),
-                            child: Icon(
-                              Ionicons.lock_closed_outline,
-                              color: kBleuColor,
-                            ),
-                          ),
-                        ),
+                      CustomEmailTextField(
+                        stringValueSetter: (value) => print(value),
+                        hintext: 'Confirm your password',
+                        label: 'Password confrimation',
                       ),
                       const SizedBox(height: 32),
                       RoundedButton(label: 'Sign Up', onPress: () {}),

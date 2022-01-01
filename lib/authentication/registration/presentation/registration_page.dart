@@ -58,7 +58,7 @@ class RegistrationPage extends StatelessWidget {
                         label: 'Password',
                       ),
                       const SizedBox(height: 16),
-                      CustomEmailTextField(
+                      CustomPasswordTextField(
                         stringValueSetter: (value) => print(value),
                         hintext: 'Confirm your password',
                         label: 'Password confrimation',

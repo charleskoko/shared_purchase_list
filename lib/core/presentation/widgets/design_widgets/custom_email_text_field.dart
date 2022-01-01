@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:shared_purchase_list/core/shared/colors.dart';
+import 'package:shared_purchase_list/core/shared/validator.dart';
 
 class CustomEmailTextField extends StatelessWidget {
   final String hintext, label;
@@ -57,7 +58,9 @@ class CustomEmailTextField extends StatelessWidget {
         ),
       ),
       onSaved: (value) => stringValueSetter(value),
-      validator: (value) {},
+      validator: (value) {
+        return Validator.emailValidator(value!);
+      },
     );
   }
 }

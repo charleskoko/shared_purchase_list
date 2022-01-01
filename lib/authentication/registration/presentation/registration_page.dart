@@ -64,7 +64,12 @@ class RegistrationPage extends StatelessWidget {
                         label: 'Password confrimation',
                       ),
                       const SizedBox(height: 32),
-                      RoundedButton(label: 'Sign Up', onPress: () {}),
+                      RoundedButton(
+                          label: 'Sign Up',
+                          onPress: () {
+                            print('here bla bla');
+                            _key.currentState!.validate();
+                          }),
                       const SizedBox(
                         height: 16,
                       ),

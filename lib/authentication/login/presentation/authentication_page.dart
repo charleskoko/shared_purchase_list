@@ -48,7 +48,11 @@ class AuthenticationPage extends StatelessWidget {
                         stringValueSetter: (value) => print(value),
                       ),
                       const SizedBox(height: 32),
-                      RoundedButton(label: 'Log in', onPress: () {}),
+                      RoundedButton(
+                          label: 'Log in',
+                          onPress: () {
+                            _key.currentState!.validate();
+                          }),
                       const SizedBox(
                         height: 16,
                       ),

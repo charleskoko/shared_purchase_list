@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:shared_purchase_list/core/shared/colors.dart';
+import 'package:shared_purchase_list/core/shared/validator.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label, hintext;
@@ -29,7 +30,7 @@ class CustomTextField extends StatelessWidget {
           color: kBleuColor,
           fontWeight: FontWeight.bold,
         ),
-        labelText: 'Username',
+        labelText: label,
         labelStyle: TextStyle(fontSize: 14, color: kBleuColor),
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
@@ -57,7 +58,12 @@ class CustomTextField extends StatelessWidget {
         ),
       ),
       onSaved: (value) => stringValueSetter(value),
-      onChanged: (value) {},
+      validator: (value) {
+        return Validator.textValidator(
+          value!,
+          label: label,
+        );
+      },
     );
   }
 }

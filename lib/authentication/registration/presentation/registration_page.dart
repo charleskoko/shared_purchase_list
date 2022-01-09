@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:shared_purchase_list/authentication/registration/application/registration_cubit.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_email_text_field.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_password_text_field.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_text_field.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/rounded_button.dart';
 import 'package:shared_purchase_list/core/shared/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RegistrationPage extends StatelessWidget {
-  static final GlobalKey<FormState> _key = GlobalKey<FormState>();
-
+class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
 
+  @override
+  _RegistrationPageState createState() => _RegistrationPageState();
+}
+
+class _RegistrationPageState extends State<RegistrationPage> {
+  static final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  String? passwordToConfirm;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,37 +45,30 @@ class RegistrationPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 32),
-                      CustomTextField(
-                        label: 'Username',
-                        hintext: 'Enter your username',
-                        stringValueSetter: (value) => print(value),
-                      ),
-                      const SizedBox(height: 16),
                       CustomEmailTextField(
-                        stringValueSetter: (value) => print(value),
                         hintext: 'Enter your email adress',
                         label: 'Email',
+                        stringValueSetter: (value) =>
+                            context.read<RegistrationCubit>().email = value,
                       ),
                       const SizedBox(
                         height: 16,
                       ),
                       CustomPasswordTextField(
-                        stringValueSetter: (value) => print(value),
                         hintext: 'Enter your password',
                         label: 'Password',
-                      ),
-                      const SizedBox(height: 16),
-                      CustomPasswordTextField(
-                        stringValueSetter: (value) => print(value),
-                        hintext: 'Confirm your password',
-                        label: 'Password confrimation',
+                        stringValueSetter: (value) {
+                          context.read<RegistrationCubit>().password = value;
+                        },
                       ),
                       const SizedBox(height: 32),
                       RoundedButton(
                           label: 'Sign Up',
                           onPress: () {
-                            print('here bla bla');
-                            _key.currentState!.validate();
+                            if (_key.currentState!.validate()) {
+                              _key.currentState!.save();
+                              context.read<RegistrationCubit>().registration();
+                            }
                           }),
                       const SizedBox(
                         height: 16,

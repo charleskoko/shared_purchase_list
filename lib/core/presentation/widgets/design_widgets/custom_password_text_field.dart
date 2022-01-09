@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:shared_purchase_list/authentication/registration/application/registration_cubit.dart';
 import 'package:shared_purchase_list/core/shared/colors.dart';
 import 'package:shared_purchase_list/core/shared/validator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomPasswordTextField extends StatefulWidget {
   final String hintext, label;
+  final String? passwordToConfirm;
   final void Function(String? value) stringValueSetter;
   const CustomPasswordTextField({
     Key? key,
+    this.passwordToConfirm,
     required this.hintext,
     required this.label,
     required this.stringValueSetter,
@@ -81,6 +85,7 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
       ),
       onSaved: (value) => widget.stringValueSetter(value),
       validator: (value) {
+        print('value: $value, confirmation: ${widget.passwordToConfirm}');
         return Validator.passwordValidator(value!);
       },
     );

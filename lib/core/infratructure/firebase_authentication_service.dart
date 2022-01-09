@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_purchase_list/authentication/core/domain/user.dart';
 
-class AuthenticationService {
+class FirebaseAuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   UserModel? _userFromFirebase(User? user) {
@@ -33,31 +33,25 @@ class AuthenticationService {
       if (kDebugMode) {
         print('sign in with credential with firebase error | $error');
       }
-      return null;
+      rethrow;
     }
   }
 
-  Future<User?> signUp({
-    required String displayName,
-    required String email,
-    required String password,
+  Future<UserModel?> signUp({
+    String? displayName,
+    String? email,
+    String? password,
   }) async {
     try {
       UserCredential userCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
+        email: email!,
+        password: password!,
       );
       User? userAuth = userCredential.user;
-      if (userAuth != null) {
-        userAuth.updateDisplayName(displayName);
-      }
-      return userAuth;
+      return _userFromFirebase(userAuth);
     } catch (error) {
-      if (kDebugMode) {
-        print('sign up with credential with firebase error | $error');
-      }
-      return null;
+      rethrow;
     }
   }
 
@@ -68,6 +62,7 @@ class AuthenticationService {
       if (kDebugMode) {
         print('sign up with credential with firebase error | $error');
       }
+      rethrow;
     }
   }
 }

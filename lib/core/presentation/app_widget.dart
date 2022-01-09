@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_purchase_list/authentication/infrastructure/authentication_repository.dart';
+import 'package:shared_purchase_list/authentication/registration/application/registration_cubit.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/app_router.dart';
 import 'package:shared_purchase_list/core/shared/colors.dart';
 
@@ -9,10 +12,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shared Purshases List',
-      theme: ThemeData(fontFamily: 'jost-regular', primaryColor: kPurpilColor),
-      onGenerateRoute: appRouter.onGenerateRoute,
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<RegistrationCubit>(
+              create: (context) => RegistrationCubit(
+                  authenticationRepository: AuthenticationRepository()))
+        ],
+        child: MaterialApp(
+          title: 'Shared Purshases List',
+          theme: ThemeData(
+            fontFamily: 'jost-regular',
+            primaryColor: kPurpilColor,
+          ),
+          onGenerateRoute: appRouter.onGenerateRoute,
+        ));
   }
 }

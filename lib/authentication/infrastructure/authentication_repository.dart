@@ -8,37 +8,39 @@ class AuthenticationRepository {
   final FirebaseAuthenticationService _firebaseAuthenticationService =
       getIt<FirebaseAuthenticationService>();
 
-  Future<Either<String, UserModel?>> login(
+  Future<Either<String?, UserModel?>> login(
       {required String email, required String password}) async {
-    try {
-      final UserModel? user = await _firebaseAuthenticationService
-          .signInWithCredential(email: email, password: password);
-      return right(user);
-    } catch (error) {
-      return left(error.toString());
-    }
+    final userOrException = await _firebaseAuthenticationService
+        .signInWithCredential(email: email, password: password);
+    print(userOrException);
+    return userOrException.fold(
+      (exceptionMessage) => left(exceptionMessage),
+      (user) => right(user),
+    );
   }
 
-  Future<Either<String, UserModel?>> registration(
-      {required String email, required String password}) async {
-    try {
-      final UserModel? user = await _firebaseAuthenticationService.signUp(
-          email: email, password: password);
-      return right(user);
-    } catch (error) {
-      return left(error.toString());
-    }
+  Future<Either<String?, UserModel?>> registration(
+      {required String? email, required String? password}) async {
+    final userOrException = await _firebaseAuthenticationService.signUp(
+        email: email, password: password);
+
+    return userOrException.fold(
+      (exceptionMessage) => left(exceptionMessage),
+      (user) => right(user),
+    );
   }
 
   Future<String?> logout() async {
-    try {
-      _firebaseAuthenticationService.signOut();
-    } catch (error) {
-      return error.toString();
-    }
+    final String? errorOrNothing =
+        await _firebaseAuthenticationService.signOut();
+    return errorOrNothing;
   }
 
-  Stream<User?> isUserAuthenticate() {
-    return _firebaseAuthenticationService.userAuthState;
+  Future<bool> isSigned() async {
+    return await _firebaseAuthenticationService.isSigned;
+  }
+
+  Future<UserModel?> currentUser() async {
+    return await _firebaseAuthenticationService.currentUser;
   }
 }

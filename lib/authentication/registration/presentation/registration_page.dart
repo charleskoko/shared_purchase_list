@@ -1,8 +1,9 @@
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_purchase_list/authentication/registration/application/registration_cubit.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_email_text_field.dart';
+import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_notification.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_password_text_field.dart';
-import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/custom_text_field.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/rounded_button.dart';
 import 'package:shared_purchase_list/core/shared/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +23,23 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Scaffold(
       backgroundColor: kGreenColor,
       body: SafeArea(
+          child: MultiBlocListener(
+        listeners: [
+          BlocListener<RegistrationCubit, RegistrationState>(
+              listener: (context, registrationState) {
+            if (registrationState is RegistrationFaillure) {
+              buildFlashNotification(
+                  title: registrationState.errorMessage, context: context);
+            } else if (registrationState is RegistrationSuccessfully) {
+              buildFlashNotification(
+                title: 'Your are sucessfully registred',
+                context: context,
+                textColor: Colors.green,
+              );
+              Navigator.pop(context);
+            }
+          })
+        ],
         child: CustomScrollView(
           slivers: [
             SliverFillRemaining(
@@ -106,7 +124,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             )
           ],
         ),
-      ),
+      )),
     );
   }
 }

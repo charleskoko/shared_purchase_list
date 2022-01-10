@@ -17,6 +17,7 @@ dependencies:
   firebase_core: ^1.10.6
   flutter_bloc: ^8.0.1
   dartz: ^0.10.1
+  flash: ^2.0.3+2
 
 dev_dependencies:
   flutter_test:

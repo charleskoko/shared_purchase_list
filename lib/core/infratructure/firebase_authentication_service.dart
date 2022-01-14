@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_purchase_list/authentication/core/domain/user.dart';
 
 class FirebaseAuthenticationService {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth firebaseAuth;
+
+  FirebaseAuthenticationService({required this.firebaseAuth});
 
   UserModel? _userFromFirebase(User? user) {
     return user != null
@@ -16,12 +18,12 @@ class FirebaseAuthenticationService {
   }
 
   Future<UserModel?> get currentUser async {
-    final User? currentUser = _firebaseAuth.currentUser;
+    final User? currentUser = firebaseAuth.currentUser;
     return _userFromFirebase(currentUser);
   }
 
   Future<bool> get isSigned async {
-    final User? currentUser = _firebaseAuth.currentUser;
+    final User? currentUser = firebaseAuth.currentUser;
     if (currentUser == null) {
       return false;
     } else {
@@ -33,7 +35,7 @@ class FirebaseAuthenticationService {
       {required String email, required String password}) async {
     try {
       UserCredential userCredential =
-          await _firebaseAuth.signInWithEmailAndPassword(
+          await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -51,7 +53,7 @@ class FirebaseAuthenticationService {
   }) async {
     try {
       final UserCredential userCredential =
-          await _firebaseAuth.createUserWithEmailAndPassword(
+          await firebaseAuth.createUserWithEmailAndPassword(
         email: email!,
         password: password!,
       );
@@ -64,7 +66,7 @@ class FirebaseAuthenticationService {
 
   Future<String?> signOut() async {
     try {
-      await _firebaseAuth.signOut();
+      await firebaseAuth.signOut();
     } on FirebaseAuthException catch (exception) {
       return exception.message;
     }

@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_purchase_list/authentication/core/domain/user.dart';
 import 'package:shared_purchase_list/authentication/infrastructure/authentication_repository.dart';
@@ -14,10 +13,10 @@ class LoginCubit extends Cubit<LoginState> {
     isUserAuthenticated();
   }
 
-  String? email, password;
+  String? email;
+  String? password;
 
   Future<void> isUserAuthenticated() async {
-    print('checking the if the user is already logged in');
     final bool isSigned = await authenticationRepository.isSigned();
     if (isSigned) {
       final UserModel? user = await authenticationRepository.currentUser();
@@ -28,7 +27,6 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> login() async {
-    print('email: $email, password: $password');
     emit(LoginLoading());
     final loginOrFailure = await authenticationRepository.login(
         email: email ?? 'empty@email.com', password: password ?? 'empty');
@@ -39,7 +37,7 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> logout() async {
-    final logoutOrFailure = authenticationRepository.logout();
+    await authenticationRepository.logout();
     emit(LoginNotLoggegIn());
   }
 }

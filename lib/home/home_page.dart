@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_purchase_list/authentication/login/application/login_cubit.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/rounded_button.dart';
 import 'package:shared_purchase_list/core/shared/routes.dart';
@@ -14,8 +15,7 @@ class HomePage extends StatelessWidget {
         listeners: [
           BlocListener<LoginCubit, LoginState>(listener: (context, loginState) {
             if (loginState is LoginNotLoggegIn) {
-              Navigator.popUntil(context, (route) => false);
-              Navigator.pushNamed(context, Routes.authentication);
+              context.goNamed('login');
             }
           })
         ],

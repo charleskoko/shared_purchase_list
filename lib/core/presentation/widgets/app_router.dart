@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_purchase_list/authentication/login/presentation/authentication_page.dart';
 import 'package:shared_purchase_list/authentication/registration/presentation/registration_page.dart';
 import 'package:shared_purchase_list/core/shared/routes.dart';
@@ -22,5 +23,24 @@ class AppRouter {
       default:
         return MaterialPageRoute(builder: (_) => const Splashpage());
     }
+  }
+
+  goRouter(context) {
+    return GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          pageBuilder: (context, state) => MaterialPage(
+            key: state.pageKey,
+            child: const HomePage(),
+          ),
+        )
+      ],
+      errorPageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: Scaffold(
+            body: Container(),
+          )),
+    );
   }
 }

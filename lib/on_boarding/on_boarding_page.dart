@@ -3,6 +3,7 @@ import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/ro
 import 'package:shared_purchase_list/core/shared/colors.dart';
 import 'package:shared_purchase_list/core/shared/routes.dart';
 import 'package:shared_purchase_list/on_boarding/domain/on_boarding_element.dart';
+import 'package:go_router/go_router.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
@@ -67,8 +68,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(
-                                    context, Routes.authentication);
+                                context.goNamed('login');
                               },
                               child: const Text('Skip'),
                             ),
@@ -88,7 +88,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       : RoundedButton(
                           label: 'Commencer',
                           onPress: () {
-                            Navigator.pushNamed(context, Routes.authentication);
+                            context.goNamed('login');
                           },
                         ))),
         ],

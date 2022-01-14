@@ -1,5 +1,7 @@
 class UserModel {
-  String? uid, displayNAme, email;
+  String? uid;
+  String? displayNAme;
+  String? email;
 
   UserModel({
     required this.uid,

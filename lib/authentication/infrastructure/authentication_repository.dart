@@ -1,18 +1,16 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_purchase_list/authentication/core/domain/user.dart';
 import 'package:shared_purchase_list/core/infratructure/firebase_authentication_service.dart';
-import 'package:shared_purchase_list/core/shared/service_locator.dart';
 
 class AuthenticationRepository {
-  final FirebaseAuthenticationService _firebaseAuthenticationService =
-      getIt<FirebaseAuthenticationService>();
+  final FirebaseAuthenticationService firebaseAuthenticationService;
+
+  AuthenticationRepository({required this.firebaseAuthenticationService});
 
   Future<Either<String?, UserModel?>> login(
       {required String email, required String password}) async {
-    final userOrException = await _firebaseAuthenticationService
+    final userOrException = await firebaseAuthenticationService
         .signInWithCredential(email: email, password: password);
-    print(userOrException);
     return userOrException.fold(
       (exceptionMessage) => left(exceptionMessage),
       (user) => right(user),
@@ -21,7 +19,7 @@ class AuthenticationRepository {
 
   Future<Either<String?, UserModel?>> registration(
       {required String? email, required String? password}) async {
-    final userOrException = await _firebaseAuthenticationService.signUp(
+    final userOrException = await firebaseAuthenticationService.signUp(
         email: email, password: password);
 
     return userOrException.fold(
@@ -30,17 +28,15 @@ class AuthenticationRepository {
     );
   }
 
-  Future<String?> logout() async {
-    final String? errorOrNothing =
-        await _firebaseAuthenticationService.signOut();
-    return errorOrNothing;
+  Future<void> logout() async {
+    await firebaseAuthenticationService.signOut();
   }
 
-  Future<bool> isSigned() async {
-    return await _firebaseAuthenticationService.isSigned;
+  Future<bool> isSigned() {
+    return firebaseAuthenticationService.isSigned;
   }
 
   Future<UserModel?> currentUser() async {
-    return await _firebaseAuthenticationService.currentUser;
+    return await firebaseAuthenticationService.currentUser;
   }
 }

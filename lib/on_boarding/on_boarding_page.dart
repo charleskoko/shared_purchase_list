@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_purchase_list/core/presentation/widgets/design_widgets/rounded_button.dart';
 import 'package:shared_purchase_list/core/shared/colors.dart';
-import 'package:shared_purchase_list/core/shared/routes.dart';
 import 'package:shared_purchase_list/on_boarding/domain/on_boarding_element.dart';
 import 'package:go_router/go_router.dart';
 

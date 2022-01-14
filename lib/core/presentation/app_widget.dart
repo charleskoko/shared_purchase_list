@@ -11,7 +11,6 @@ import 'package:shared_purchase_list/core/infratructure/firebase_authentication_
 import 'package:shared_purchase_list/core/shared/colors.dart';
 import 'package:shared_purchase_list/home/home_page.dart';
 import 'package:shared_purchase_list/on_boarding/on_boarding_page.dart';
-import 'package:shared_purchase_list/splash/presentation/splash_page.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({Key? key}) : super(key: key);

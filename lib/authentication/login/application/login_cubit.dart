@@ -17,7 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
   String? password;
 
   Future<void> isUserAuthenticated() async {
-    final bool isSigned = await authenticationRepository.isSigned();
+    final bool isSigned = authenticationRepository.isSigned();
     if (isSigned) {
       final UserModel? user = await authenticationRepository.currentUser();
       emit(LoginSuccessfully(user: user));

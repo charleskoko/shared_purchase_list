@@ -22,7 +22,7 @@ class FirebaseAuthenticationService {
     return _userFromFirebase(currentUser);
   }
 
-  Future<bool> get isSigned async {
+  bool get isSigned {
     final User? currentUser = firebaseAuth.currentUser;
     if (currentUser == null) {
       return false;

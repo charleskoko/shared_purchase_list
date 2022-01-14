@@ -32,7 +32,7 @@ class AuthenticationRepository {
     await firebaseAuthenticationService.signOut();
   }
 
-  Future<bool> isSigned() {
+  bool isSigned() {
     return firebaseAuthenticationService.isSigned;
   }
 

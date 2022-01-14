@@ -15,8 +15,10 @@ class Splashpage extends StatelessWidget {
           BlocListener<LoginCubit, LoginState>(
             listener: (context, loginState) {
               if (loginState is LoginSuccessfully) {
+                print('state logged In');
                 context.goNamed('home');
               } else if (loginState is LoginNotLoggegIn) {
+                print('state not logged in');
                 context.goNamed('on-boarding');
               }
             },

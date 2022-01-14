@@ -21,9 +21,20 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
+  FirebaseAuthenticationService firebaseAuthenticationService =
+      FirebaseAuthenticationService(
+    firebaseAuth: FirebaseAuth.instance,
+  );
   @override
   Widget build(BuildContext context) {
     final router = GoRouter(
+      redirect: (state) {
+        final loggedIn = firebaseAuthenticationService.isSigned;
+        final isLogging = state.location == '/login';
+        if (!loggedIn && !isLogging) return '/login';
+        if (loggedIn && isLogging) return '/';
+        return null;
+      },
       routes: [
         GoRoute(
           name: 'registration',
@@ -31,14 +42,6 @@ class _AppWidgetState extends State<AppWidget> {
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
             child: const RegistrationPage(),
-          ),
-        ),
-        GoRoute(
-          name: 'splash',
-          path: '/',
-          pageBuilder: (context, state) => MaterialPage(
-            key: state.pageKey,
-            child: const Splashpage(),
           ),
         ),
         GoRoute(
@@ -51,7 +54,7 @@ class _AppWidgetState extends State<AppWidget> {
         ),
         GoRoute(
           name: 'home',
-          path: '/home',
+          path: '/',
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
             child: const HomePage(),
@@ -79,13 +82,8 @@ class _AppWidgetState extends State<AppWidget> {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (context) => FirebaseAuthenticationService(
-              firebaseAuth: FirebaseAuth.instance),
-        ),
-        RepositoryProvider(
           create: (context) => AuthenticationRepository(
-            firebaseAuthenticationService:
-                context.read<FirebaseAuthenticationService>(),
+            firebaseAuthenticationService: firebaseAuthenticationService,
           ),
         ),
       ],
